@@ -1,17 +1,40 @@
 {
-    "buildNpmdoc":"search-index",
+    "author": "kai zhu <kaizhu256@gmail.com>",
+    "buildNpmdoc": "search-index",
+    "description": "api documentation for [search-index (v0.9.17)](https://github.com/fergiemcdowall/search-index) [![npm package](https://img.shields.io/npm/v/npmdoc-search-index.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-search-index) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-search-index.svg)](https://travis-ci.org/npmdoc/node-npmdoc-search-index)",
     "devDependencies": {
-        "search-index": "*",
         "electron-lite": "kaizhu256/node-electron-lite#alpha",
+        "search-index": "*",
         "utility2": "kaizhu256/node-utility2#alpha"
     },
-    "name":"npmdoc-search-index",
+    "engines": {
+        "node": ">=4.0"
+    },
+    "homepage": "https://github.com/npmdoc/node-npmdoc-search-index",
+    "keywords": [
+        "documentation",
+        "search-index"
+    ],
+    "license": "MIT",
+    "main": "lib.npmdoc_search_index.js",
+    "name": "npmdoc-search-index",
+    "nameAlias": "npmdoc_search_index",
+    "nameOriginal": "npmdoc-search-index",
+    "os": [
+        "darwin",
+        "linux"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/npmdoc/node-npmdoc-search-index"
     },
     "scripts": {
-        "build-ci": "utility2 shReadmeTest build_ci.sh"
+        "build-ci": "utility2 shReadmeTest build_ci.sh",
+        "env": "env",
+        "heroku-postbuild": "(set -e; npm install \"kaizhu256/node-utility2#alpha\"; utility2 shDeployHeroku)",
+        "postinstall": "if [ -f npm_scripts.sh ]; then ./npm_scripts.sh postinstall; fi",
+        "start": "(set -e; export PORT=${PORT:-8080}; utility2 start test.js)",
+        "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
     },
     "version": "0.0.1"
 }
