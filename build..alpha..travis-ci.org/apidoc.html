@@ -51,7 +51,7 @@
 
         href="https://github.com/fergiemcdowall/search-index"
 
-    >search-index (v0.9.17)</a>
+    >search-index (v0.10.0)</a>
 </h1>
 <h4>A persistent full text search engine for the browser and Node.js</h4>
 <div class="apidocSectionDiv"><a
@@ -61,12 +61,54 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.search-index">module search-index</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.search-index.search-index">
+            function <span class="apidocSignatureSpan"></span>search-index
+            <span class="apidocSignatureSpan">(givenOptions, moduleReady)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.search-index" id="apidoc.module.search-index">module search-index</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.search-index.search-index" id="apidoc.element.search-index.search-index">
+        function <span class="apidocSignatureSpan"></span>search-index
+        <span class="apidocSignatureSpan">(givenOptions, moduleReady)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">search-index = function (givenOptions, moduleReady) {
+  const optionsLoaded = function (err, SearchIndex) {
+    const siUtil = require(&#x27;./siUtil.js&#x27;)(SearchIndex.options)
+    if (err) return moduleReady(err)
+    SearchIndex.close = siUtil.close
+    SearchIndex.countDocs = siUtil.countDocs
+    getAdder(SearchIndex, adderLoaded)
+  }
+
+  const adderLoaded = function (err, SearchIndex) {
+    if (err) return moduleReady(err)
+    getSearcher(SearchIndex, searcherLoaded)
+  }
+
+  const searcherLoaded = function (err, SearchIndex) {
+    if (err) return moduleReady(err)
+    return moduleReady(err, SearchIndex)
+  }
+
+  getOptions(givenOptions, optionsLoaded)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 
