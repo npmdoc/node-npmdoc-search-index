@@ -1,9 +1,14 @@
-# api documentation for  [search-index (v0.9.17)](https://github.com/fergiemcdowall/search-index)  [![npm package](https://img.shields.io/npm/v/npmdoc-search-index.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-search-index) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-search-index.svg)](https://travis-ci.org/npmdoc/node-npmdoc-search-index)
+# npmdoc-search-index
+
+#### api documentation for  [search-index (v0.10.0)](https://github.com/fergiemcdowall/search-index)  [![npm package](https://img.shields.io/npm/v/npmdoc-search-index.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-search-index) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-search-index.svg)](https://travis-ci.org/npmdoc/node-npmdoc-search-index)
+
 #### A persistent full text search engine for the browser and Node.js
 
-[![NPM](https://nodei.co/npm/search-index.png?downloads=true)](https://www.npmjs.com/package/search-index)
+[![NPM](https://nodei.co/npm/search-index.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/search-index)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-search-index/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-search-index_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-search-index/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-search-index/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-search-index/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-search-index/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-search-index/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-search-index/build/screenCapture.npmPackageListing.svg)
 
@@ -17,8 +22,7 @@
 
 {
     "author": {
-        "name": "Fergus McDowall",
-        "email": "fergusmcdowall@gmail.com"
+        "name": "Fergus McDowall"
     },
     "browser": {
         "leveldown": "level-js"
@@ -30,8 +34,8 @@
         "bunyan": "^1.8.10",
         "leveldown": "^1.6.0",
         "levelup": "^1.3.5",
-        "search-index-adder": "^0.2.0",
-        "search-index-searcher": "^0.1.28"
+        "search-index-adder": "^0.2.1",
+        "search-index-searcher": "^0.2.0"
     },
     "description": "A persistent full text search engine for the browser and Node.js",
     "devDependencies": {
@@ -41,11 +45,14 @@
         "browserify": "^13.1.0",
         "disc": "^1.3.2",
         "highland": "^2.10.0",
+        "http-server": "^0.9.0",
         "left-pad": "^1.1.3",
         "level-js": "^2.2.4",
         "mocha": "^3.2.0",
         "request": "^2.78.0",
         "reuters-21578-json": "0.0.8",
+        "semantic-release": "^6.3.2",
+        "semantic-release-cli": "^3.0.3",
         "should": "^10.0.0",
         "sqldown": "^2.1.0",
         "sqlite3": "^3.1.4",
@@ -58,13 +65,13 @@
     },
     "directories": {},
     "dist": {
-        "shasum": "7780c24dac94aa98902e05e9181c987d6b8363a5",
-        "tarball": "https://registry.npmjs.org/search-index/-/search-index-0.9.17.tgz"
+        "shasum": "31c20697b64b6fd37cdb1ea8bcaf86538acacbe5",
+        "tarball": "https://registry.npmjs.org/search-index/-/search-index-0.10.0.tgz"
     },
     "engines": {
         "node": ">=4"
     },
-    "gitHead": "4c77d6d3736a392e2418a3a510b05b21136f0058",
+    "gitHead": "bf6af75377f9dc4d8cafdc7a420d6601aa3bfcd7",
     "homepage": "https://github.com/fergiemcdowall/search-index",
     "keywords": [
         "index",
@@ -78,43 +85,33 @@
     "main": "lib/index.js",
     "maintainers": [
         {
-            "name": "fergie",
-            "email": "fergusmcdowall@gmail.com"
+            "name": "fergie"
         },
         {
-            "name": "mewwts",
-            "email": "mats@plysjbyen.net"
+            "name": "mewwts"
         }
     ],
     "name": "search-index",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/fergiemcdowall/search-index.git"
     },
     "scripts": {
         "anylize-web-bundle": "browserify --full-paths lib/index.js --standalone SearchIndex > dist/search-index-full-paths.js && discify dist/search-index-full-paths.js > dist/out.html",
+        "demo-server": "http-server && echo 'demo is running at /doc/demo/'",
         "dist": "browserify lib/index.js --standalone SearchIndex > dist/search-index.js",
-        "dist-min": "npm run dist && cat dist/search-index.js | uglifyjs -c dead_code > dist/search-index.min.js",
+        "dist-min": "npm run dist && cat dist/search-index.js | uglifyjs -c dead_code > dist/search-index.min.js && cp dist/search-index.min.js docs/demo/",
         "empty-sandbox": "rm -rf test/sandbox && mkdir test/sandbox",
+        "semantic-release": "semantic-release pre && npm publish && semantic-release post",
         "test": "npm run empty-sandbox && date && npm run test-node && npm run test-browser && standard test/* lib/*",
         "test-browser": "node test/browser/runtest.js",
-        "test-node": "tape test/node/tape-tests/*.js && mocha test/node/mocha-tests --recursive --timeout 10000"
+        "test-node": "tape test/node/tape-tests/*.js && mocha test/node/mocha-tests --recursive --timeout 10000",
+        "test-with-local-deps": "npm install && npm install ../search-index-adder ../search-index-searcher && npm test"
     },
-    "version": "0.9.17"
+    "version": "0.10.0"
 }
 ```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module search-index](#apidoc.module.search-index)
-
-
-
-# <a name="apidoc.module.search-index"></a>[module search-index](#apidoc.module.search-index)
 
 
 
